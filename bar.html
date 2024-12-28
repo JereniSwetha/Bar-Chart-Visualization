@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Chart Visualizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+      background-color: rgb(253, 200, 253);
+    }
+    canvas {
+      max-width: 1200px;
+      margin: 20px auto;
+      height: 50%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bar Chart Visualizer</h1>
+  
+  <form id="dataForm">
+    <label for="categories">Enter your Datas: </label>
+    <input type="text" id="categories" placeholder="e.g., A,B,C,D"><br><br>
+    
+    <label for="values">Enter your percentage: </label>
+    <input type="text" id="values" placeholder="e.g., 10,20,30,40"><br><br>
+    
+    <button type="button" onclick="generateChart()">Generate Chart</button>
+  </form>
+  
+  <canvas id="barChart"></canvas>
+  
+  <script>
+    let chart;
+
+    function generateChart() {
+      const categories = document.getElementById("categories").value.split(",");
+      const values = document.getElementById("values").value.split(",").map(Number);
+
+      if (categories.length !== values.length) {
+        alert("Please ensure categories and values have the same number of items.");
+        return;
+      }
+
+      if (chart) {
+        chart.destroy();
+      }
+
+      const ctx = document.getElementById("barChart").getContext("2d");
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: categories,
+          datasets: [{
+            label: 'Data Visualization',
+            data: values,
+            backgroundColor: 'rgba(165, 192, 192, 0.2)',
+            borderColor: 'rgba(85, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
