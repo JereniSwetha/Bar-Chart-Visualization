@@ -13,9 +13,10 @@
       background-color: rgb(253, 200, 253);
     }
     canvas {
-      max-width: 1200px;
+      max-width: 1000px; 
       margin: 20px auto;
-      height: 50%;
+      height: 300px; 
+      width: 90%; 
     }
   </style>
 </head>
@@ -50,7 +51,11 @@
         chart.destroy();
       }
 
-      const ctx = document.getElementById("barChart").getContext("2d");
+      const canvas = document.getElementById("barChart");
+      canvas.width = 1000; 
+      canvas.height = 700; 
+
+      const ctx = canvas.getContext("2d");
       chart = new Chart(ctx, {
         type: 'bar',
         data: {
